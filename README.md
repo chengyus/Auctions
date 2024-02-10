@@ -11,3 +11,7 @@ which for now basically .gitignore the compiled output.  The wwwroot for now I b
 
 Oh, and for good measure, I followed the SO answer on forcing LF linebreaks:
 https://stackoverflow.com/questions/9976986/force-lf-eol-in-git-repo-and-working-copy
+
+## Database Setup
+
+Oh, ya, the FCC YT video didn't say this, but once I got to the database part (or for good measure and smooth sailing), I had to download Microsoft SQL Server 2022 Developer version. (The Express version didn't work; I got naive thinking the PostgreSQL or Npgsql could work. Nope, there are specific field datatype that the default ASP.NET template used that will cause the default generate migration to fail.  But I saw think very good examples on Npgsql website; so perhaps later on a different project or when I find more community pages / guides, Npgsql could totally work; I think some point along the last Adv C# video Npgsql was used with EF Core or something that worked with SQLite... that was smooth sailing).
