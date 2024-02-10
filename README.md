@@ -11,3 +11,7 @@ which for now basically .gitignore the compiled output.  The wwwroot for now I b
 
 Oh, and for good measure, I followed the SO answer on forcing LF linebreaks:
 https://stackoverflow.com/questions/9976986/force-lf-eol-in-git-repo-and-working-copy
+
+## Database Setup
+
+Now this branch will try to setup for the PostgreSQL; but in the main branch I have locally setup for MS SQL Server 2022 Developer version.
