@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Auctions.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Auctions.Data
@@ -16,5 +17,9 @@ namespace Auctions.Data
     {
       options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
     }
+
+    public DbSet<Listing> Listings { get; set; }
+    public DbSet<Bid> Bids { get; set; }
+    public DbSet<Comment> Comments { get; set; }
   }
 }
