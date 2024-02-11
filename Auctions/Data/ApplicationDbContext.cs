@@ -10,6 +10,9 @@ namespace Auctions.Data
         : base(options)
     {
     }
-      public DbSet<Auctions.Models.Listing> Listing { get; set; } = default!;
+    public DbSet<Listing> Listings { get; set; }
+    public DbSet<Bid> Bids { get; set; }
+    public DbSet<Comment> Comments { get; set; }
+
   }
 }

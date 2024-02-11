@@ -14,7 +14,7 @@ namespace Auctions.Data.Services
 
     public IQueryable<Listing> GetAll()
     {
-      var applicationDbContext = _context.Listing.Include(l => l.User);
+      var applicationDbContext = _context.Listings.Include(l => l.User);
       return applicationDbContext;
     }
   }
