@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Auctions.Models;
 
 namespace Auctions.Data
 {
@@ -9,5 +10,6 @@ namespace Auctions.Data
         : base(options)
     {
     }
+      public DbSet<Auctions.Models.Listing> Listing { get; set; } = default!;
   }
 }
