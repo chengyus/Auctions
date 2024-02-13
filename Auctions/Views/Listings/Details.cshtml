@@ -8,7 +8,7 @@
 
 @if(User.Identity.IsAuthenticated)
 {
-  @if(Model.isSold == true)
+  @if(Model.IsSold == true)
   {
     @foreach(var bid in Model.Bids)
     {
