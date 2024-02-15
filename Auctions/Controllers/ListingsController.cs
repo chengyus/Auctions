@@ -21,6 +21,7 @@ namespace Auctions.Controllers
     {
       _listingsService = listingsService;
       _webHostEnvironment = webHostEnvironment;
+      _bidsService = bidsService;
     }
 
     // GET: Listings
@@ -37,6 +38,20 @@ namespace Auctions.Controllers
 
       return View(await PaginatedList<Listing>.CreateAsync(applicationDbContext.Where(l => l.IsSold == false).AsNoTracking(), pageNumber ?? 1, pageSize));
     }
+    // public async Task<IActionResult> MyListings(int? pageNumber)
+    // {
+    //   var applicationDbContext = _listingsService.GetAll();
+	  //   int pageSize = 3;
+
+    //   return View(await PaginatedList<Bid>.CreateAsync(applicationDbContext.Where(l => l.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
+    // }
+    // public async Task<IActionResult> MyBids(int? pageNumber)
+    // {
+    //   var applicationDbContext = _bidsService.GetAll();
+    //   int pageSize = 3;
+
+    //   return View(await PaginatedList<Bid>.CreateAsync(applicationDbContext.Where(l => l.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
+    // }
 
     // GET: Listings/Details/5
     public async Task<IActionResult> Details(int? id)
@@ -57,7 +72,7 @@ namespace Auctions.Controllers
 
     // GET: Listings/Create
     public IActionResult Create()
-    {      
+    {
       return View();
     }
 
@@ -103,6 +118,13 @@ namespace Auctions.Controllers
       listing.Price = bid.Price;
       await _listingsService.SaveChanges();
 
+      return View("Details", listing);
+    }
+    public async Task<ActionResult> CloseBidding(int id)
+    {
+      var listing = await _listingsService.GetById(id);
+      listing.IsSold = true;
+      await _listingsService.SaveChanges();
       return View("Details", listing);
     }
     //  // GET: Listings/Edit/5
