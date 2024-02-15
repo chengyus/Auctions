@@ -101,7 +101,9 @@ namespace Auctions.Controllers
       }
       var listing = await _listingsService.GetById(bid.ListingId);
       listing.Price = bid.Price;
-      
+      await _listingsService.SaveChanges();
+
+      return View("Details", listing);
     }
     //  // GET: Listings/Edit/5
     //  public async Task<IActionResult> Edit(int? id)
