@@ -36,7 +36,7 @@ namespace Auctions.Controllers
 
       }
 
-      return View(await PaginatedList<Listing>.CreateAsync(applicationDbContext.Where(l => l.IsSold == false).AsNoTracking(), pageNumber ?? 1, pageSize));
+      return View(await PaginatedList<Listing>.CreateAsync(applicationDbContext/*.Where(l => l.IsSold == false)*/.AsNoTracking(), pageNumber ?? 1, pageSize));
     }
     // public async Task<IActionResult> MyListings(int? pageNumber)
     // {
@@ -126,6 +126,16 @@ namespace Auctions.Controllers
       listing.IsSold = true;
       await _listingsService.SaveChanges();
       return View("Details", listing);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> AddComment([Bind("Id, Content, ListingId, IdentityUserId")] Comment comment)
+    {
+      if(ModelState.IsValid)
+      {
+        await _commentsService.Add(comment);
+      }
+
     }
     //  // GET: Listings/Edit/5
     //  public async Task<IActionResult> Edit(int? id)
