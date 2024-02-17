@@ -39,7 +39,7 @@ namespace Auctions.Controllers
 
       }
 
-      return View(await PaginatedList<Listing>.CreateAsync(applicationDbContext/*.Where(l => l.IsSold == false)*/.AsNoTracking(), pageNumber ?? 1, pageSize));
+      return View(await PaginatedList<Listing>.CreateAsync(applicationDbContext.Where(l => l.IsSold == false).AsNoTracking(), pageNumber ?? 1, pageSize));
     }
     public async Task<IActionResult> MyListings(int? pageNumber)
     {
