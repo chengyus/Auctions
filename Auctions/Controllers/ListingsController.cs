@@ -15,13 +15,15 @@ namespace Auctions.Controllers
   {
     private readonly IListingsService _listingsService;
     private readonly IBidsService _bidsService;
+    private readonly ICommentsService _commentsService;
     private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public ListingsController(IListingsService listingsService, IWebHostEnvironment webHostEnvironment, IBidsService bidsService)
+    public ListingsController(IListingsService listingsService, IWebHostEnvironment webHostEnvironment, IBidsService bidsService, ICommentsService commentsService)
     {
       _listingsService = listingsService;
       _webHostEnvironment = webHostEnvironment;
       _bidsService = bidsService;
+      _commentsService = commentsService;
     }
 
     // GET: Listings
@@ -41,7 +43,7 @@ namespace Auctions.Controllers
     // public async Task<IActionResult> MyListings(int? pageNumber)
     // {
     //   var applicationDbContext = _listingsService.GetAll();
-	  //   int pageSize = 3;
+    //   int pageSize = 3;
 
     //   return View(await PaginatedList<Bid>.CreateAsync(applicationDbContext.Where(l => l.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
     // }
@@ -110,8 +112,8 @@ namespace Auctions.Controllers
     [HttpPost]
     public async Task<ActionResult> AddBid([Bind("Id, Price, ListingId, IdentityUserId")] Bid bid)
     {
-	    if(ModelState.IsValid)
-	    {
+      if(ModelState.IsValid)
+      {
         await _bidsService.Add(bid);
       }
       var listing = await _listingsService.GetById(bid.ListingId);
@@ -135,7 +137,8 @@ namespace Auctions.Controllers
       {
         await _commentsService.Add(comment);
       }
-
+      var listing = await _listingsService.GetById(comment.ListingId);
+      return View("Details", listing);
     }
     //  // GET: Listings/Edit/5
     //  public async Task<IActionResult> Edit(int? id)
