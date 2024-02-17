@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,13 +48,13 @@ namespace Auctions.Controllers
 
       return View("Index", await PaginatedList<Listing>.CreateAsync(applicationDbContext.Where(l => l.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
     }
-//     public async Task<IActionResult> MyBids(int? pageNumber)
-//     {
-//       var applicationDbContext = _bidsService.GetAll();
-//       int pageSize = 3;
+    public async Task<IActionResult> MyBids(int? pageNumber)
+    {
+      var applicationDbContext = _bidsService.GetAll();
+      int pageSize = 3;
 
-//       return View(await PaginatedList<Bid>.CreateAsync(applicationDbContext.Where(l => l.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
-//     }
+      return View(await PaginatedList<Bid>.CreateAsync(applicationDbContext.Where(l => l.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
+    }
 
     // GET: Listings/Details/5
     public async Task<IActionResult> Details(int? id)
