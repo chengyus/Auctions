@@ -1,23 +1,23 @@
-using Microsoft.Playwright.NUnit;
+﻿using Microsoft.Playwright.NUnit;
 
 namespace PlaywrightTests;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
-public class MyTest : PageTest
+public class MyEndToEndTestSuite : PageTest
 {
   [Test]
-  public async Task ShouldHaveTheCorrectSlogan()
+  public async Task ShouldHaveCopyrightLine()
   {
-    await Page.GotoAsync("https://playwright.dev");
-    await Expect(Page.Locator("text=enables reliable end-to-end testing for modern web apps")).ToBeVisibleAsync();
+    await Page.GotoAsync("https://localhost:7106");
+    await Expect(Page.Locator("text=© 2024 - Auctions")).ToBeVisibleAsync();
   }
 
   [Test]
   public async Task ShouldHaveTheCorrectTitle()
   {
-    await Page.GotoAsync("https://playwright.dev");
-    var title = Page.Locator(".navbar__inner .navbar__title");
-    await Expect(title).ToHaveTextAsync("Playwright");
+    await Page.GotoAsync("https://localhost:7106");
+    //ref video: https://youtu.be/QDkKmiyULu4, luckily there is an Async version.
+    await Expect(Page).ToHaveTitleAsync("Index - Auctions");
   }
 }
